@@ -1,1 +1,1 @@
-# news-aggregator-app repo setup
+news-aggregator
