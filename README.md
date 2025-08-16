@@ -2,7 +2,7 @@
 
 ### Overview
 
-This project is a news aggregator website built with React.ts. The application pulls articles from various sources and displays them in a clean, easy-to-read format. Users can search for articles by keyword, filter results by date, category, and source, and create a personalized news feed. The application is mobile-responsive and optimized for viewing on various devices.
+This project is a news aggregator website built with React.ts. The application pulls articles from various sources and displays them in a clean, easy-to-read format. Users can search for articles by keyword, filter results by date, category, and source, and create a personalized news feed. The application is mobile-responsive and optimized for viewing on various devices
 
 ### Features
 
