@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Container, Header, card } from "./index";
 import { Col, Row } from "react-bootstrap";
-import { header, capitaLize, Article } from "../../config/config";
+import { header, capitaLize } from "../../config/config";
 import { NewsCard } from "../index";
 import Loading from "../Loading/Loading";
 import NoDataFound from "../NoDataFound/NoDataFound";

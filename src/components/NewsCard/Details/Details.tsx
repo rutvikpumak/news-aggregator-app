@@ -1,5 +1,5 @@
 import React from "react";
-import { summary, newsChannel, lastUpdate } from "../../../config/config";
+import { newsChannel, lastUpdate } from "../../../config/config";
 import "./Details.css";
 
 // --- Props Type ---
