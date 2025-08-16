@@ -3,6 +3,7 @@ import {
   fetchNewsAPIArticles,
   fetchNYTimesArticles,
   fetchGnewsArticles,
+  fetchGuardianArticles,
 } from "../../config/api";
 
 // --- Types ---
@@ -74,6 +75,14 @@ export const fetchArticles = createAsyncThunk<
   ) {
     const nyTimesArticles = await fetchNYTimesArticles(query, params);
     articles = [...articles, ...nyTimesArticles];
+  }
+
+  if (
+    (source as Source).key === "guardian-api" ||
+    (source as Source).key === "all"
+  ) {
+    const guardianArticles = await fetchGuardianArticles(query, params);
+    articles = [...articles, ...guardianArticles];
   }
 
   return articles;

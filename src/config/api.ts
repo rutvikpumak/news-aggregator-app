@@ -4,6 +4,7 @@ import axios from "axios";
 const NEWS_API_KEY = process.env.REACT_APP_NEWSAPI_KEY;
 const BBC_API_KEY = process.env.REACT_APP_NYT_KEY;
 const GNEWS_API_KEY = process.env.REACT_APP_GNEWS_KEY;
+const GUARDIAN_API_KEY = process.env.REACT_APP_GUARDAPI_KEY;
 
 // --- Types ---
 interface Filters {
@@ -41,7 +42,9 @@ const normalizeArticles = (articles: any[], source: string): Article[] => {
     description:
       article.description ||
       article.fields?.trailText ||
-      article.lead_paragraph,
+      article.lead_paragraph ||
+      article?.multimedia?.caption,
+
     url: article.url || article.webUrl || article.web_url || "",
     source: article?.source?.name || article?.fields?.publication || source,
     publishedAt:
@@ -52,7 +55,11 @@ const normalizeArticles = (articles: any[], source: string): Article[] => {
       article?.byline?.original ||
       "Unknown Author",
     category: article?.category || article?.sectionName || "General",
-    imgSrc: article?.urlToImage || article.image,
+    imgSrc:
+      article?.urlToImage ||
+      article?.image ||
+      article?.fields?.thumbnail ||
+      article?.multimedia?.default?.url,
   }));
 };
 
@@ -104,4 +111,27 @@ export const fetchGnewsArticles = async (
 
   const data = await makeApiRequest(url, params);
   return data ? normalizeArticles(data.articles, "GNews") : [];
+};
+
+export const fetchGuardianArticles = async (
+  query: string,
+  filters: Filters
+) => {
+  const searchUrl = `https://content.guardianapis.com/search`;
+  const searchWithDateUrl = `https://content.guardianapis.com?from-date=${filters.date}`;
+  const url =
+    query || filters.category
+      ? searchUrl
+      : filters.date
+      ? searchWithDateUrl
+      : searchUrl;
+
+  const params = {
+    q: query || filters.category,
+    "api-key": GUARDIAN_API_KEY,
+    "show-fields": "all",
+  };
+
+  const data = await makeApiRequest(searchUrl, params);
+  return data ? normalizeArticles(data.response.results, "The Guardian") : [];
 };

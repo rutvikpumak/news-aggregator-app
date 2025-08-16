@@ -85,7 +85,7 @@ const NavBar: React.FC = () => {
         query: searchInputValue,
         source: selected.key,
         category: selectedCategory,
-        date: startDate,
+        date: moment(startDate).format("YYYY-MM-DD"),
       })
     );
     dispatch(setQuery(""));

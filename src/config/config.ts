@@ -46,6 +46,7 @@ export const sources: Source[] = [
   { name: "News API", key: "news-api" },
   { name: "New York Times API", key: "ny-times" },
   { name: "Gnews API", key: "gnews-api" },
+  { name: "Guardian API", key: "guardian-api" },
 ];
 
 export const categories: Category[] = [
